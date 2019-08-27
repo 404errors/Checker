@@ -31,7 +31,7 @@ public class LogChecker {
 	
 	//TODO: multi threading
 	
-	public static void main() {
+	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		List<Path> logFiles = InputReader.getLogFileList(scanner);
 		conditionList = InputReader.getPatterns(scanner);
@@ -44,7 +44,7 @@ public class LogChecker {
 		ExecutorService executorService = Executors.newCachedThreadPool();
 		for (int processorCounter = 0; processorCounter < numberOfProcessor; ++processorCounter) {
 			LogFileProcessor logFileProcessor = new LogFileProcessor();
-			for (int fileCounter = processorCounter * 20; fileCounter < Math.min(logFiles.size(), processorCounter * 20); ++fileCounter) {
+			for (int fileCounter = processorCounter * 20; fileCounter < Math.min(logFiles.size(), (processorCounter +1) * 20); ++fileCounter) {
 				logFileProcessor.addFile(logFiles.get(fileCounter));
 			}
 			fileProcessors.add(logFileProcessor);
